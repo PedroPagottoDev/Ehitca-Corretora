@@ -1,0 +1,855 @@
+/* ==========================================================
+   Ehtica Corretora de Seguros
+   Para mudar a identidade, altere só as variáveis abaixo.
+   ========================================================== */
+
+:root {
+  /* Cores da marca: azul e branco */
+  --principal: #1452B8;        /* azul: botões, links e nome da marca */
+  --principal-hover: #0F3F8F;
+  --marca-texto: #C6DAF8;      /* azul claro dos grifos e dos números do sinistro */
+  --marca-borda: #7FA5E0;
+  --marca-tinta: #0E1B2E;      /* texto sobre o azul claro */
+  --grifo-fundo: #C6DAF8;      /* cor do marca-texto nas cláusulas */
+
+  /* Superfícies e texto */
+  --papel: #FFFFFF;
+  --papel-alt: #F1F5FC;        /* fundo das seções alternadas */
+  --superficie: #FFFFFF;
+  --tinta: #0E1B2E;
+  --tinta-doc: #24324A;
+  --tinta-suave: #3B4A60;
+  --tinta-fraca: #4F5E73;
+  --linha: #D3DEEE;
+  --linha-forte: #0E1B2E;
+  --link: #1452B8;
+  --sobre-principal: #FFFFFF;
+
+  /* Faixa do sinistro */
+  --banda: #0D2F66;
+  --banda-titulo: #FFFFFF;
+  --banda-texto: #CFDCF0;
+  --botao-claro: #FFFFFF;
+  --botao-claro-texto: #0E1B2E;
+
+  /* Tipografia e medidas */
+  --fonte: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --fonte-doc: 'Literata', Georgia, 'Times New Roman', serif;
+  --largura: 1200px;
+  --margem: clamp(20px, 5vw, 64px);
+  --raio: 6px;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --principal: #2563C9;
+    --principal-hover: #2F70DA;
+    --grifo-fundo: #2A4F8A;
+
+    --papel: #0A1424;
+    --papel-alt: #0F1C31;
+    --superficie: #12223A;
+    --tinta: #E8EEF8;
+    --tinta-doc: #D4DEEC;
+    --tinta-suave: #B5C2D6;
+    --tinta-fraca: #9AA9BF;
+    --linha: #233652;
+    --linha-forte: #E8EEF8;
+    --link: #8DB8FF;
+
+    --banda: #13346B;
+    --banda-texto: #C9D8EE;
+
+    color-scheme: dark;
+  }
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--fonte);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p, figure, blockquote, dl, dd {
+  margin: 0;
+}
+
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+svg {
+  flex: none;
+}
+
+a {
+  color: var(--link);
+  text-underline-offset: 4px;
+}
+
+a:hover {
+  color: var(--tinta);
+}
+
+a:focus-visible {
+  outline: 3px solid var(--tinta);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.container {
+  max-width: var(--largura);
+  margin-inline: auto;
+  padding-inline: var(--margem);
+}
+
+.pular {
+  position: absolute;
+  left: 12px;
+  top: -100px;
+  z-index: 10;
+  padding: 12px 16px;
+  background: var(--tinta);
+  color: var(--papel);
+  font-weight: 700;
+  border-radius: var(--raio);
+}
+
+.pular:focus {
+  top: 12px;
+  color: var(--papel);
+}
+
+/* ---------- Botões e links ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 0 24px;
+  border: 2px solid transparent;
+  border-radius: var(--raio);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn--pequeno {
+  min-height: 44px;
+  padding: 0 18px;
+  gap: 8px;
+  font-size: 16px;
+}
+
+.btn--medio {
+  min-height: 50px;
+  padding: 0 20px;
+  font-size: 16px;
+}
+
+.btn--principal {
+  background: var(--principal);
+  color: var(--sobre-principal);
+}
+
+.btn--principal:hover {
+  background: var(--principal-hover);
+  color: var(--sobre-principal);
+}
+
+.btn--contorno {
+  border-color: var(--linha-forte);
+  color: var(--tinta);
+}
+
+.btn--contorno:hover {
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+.btn--claro {
+  background: var(--botao-claro);
+  color: var(--botao-claro-texto);
+}
+
+.btn--claro:hover {
+  background: var(--marca-texto);
+  color: var(--marca-tinta);
+}
+
+.link-forte {
+  align-self: flex-start;
+  padding: 10px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--link);
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ---------- Cabeçalho ---------- */
+
+.topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 28px;
+  padding-block: 20px;
+}
+
+.marca {
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  min-height: 44px;
+  color: var(--tinta);
+  text-decoration: none;
+}
+
+.marca:hover {
+  color: var(--tinta);
+}
+
+.marca__nome {
+  padding: 0 3px;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: var(--link);
+}
+
+.marca__desc {
+  font-size: 15px;
+  color: var(--tinta-suave);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 28px;
+}
+
+.nav__link {
+  padding: 12px 0;
+  color: var(--tinta);
+  text-decoration: none;
+}
+
+.nav__link:hover {
+  color: var(--tinta);
+  text-decoration: underline;
+}
+
+/* ---------- Abertura ---------- */
+
+.heroi {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 56px 64px;
+  padding-block: clamp(32px, 6vw, 88px) clamp(64px, 9vw, 120px);
+}
+
+.heroi__texto {
+  flex: 1 1 400px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.heroi h1 {
+  max-width: 13ch;
+  font-size: clamp(2.5rem, 5.2vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+.heroi__lead {
+  max-width: 34em;
+  font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--tinta-suave);
+}
+
+/* Trecho de apólice grifado */
+
+.apolice {
+  flex: 1 1 520px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.apolice__folha {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  padding: clamp(20px, 3vw, 36px);
+  background: var(--superficie);
+  border: 1px solid var(--linha);
+  border-radius: 3px;
+}
+
+.apolice__cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 16px;
+  font-size: 14px;
+  color: var(--tinta-fraca);
+}
+
+.apolice__cabecalho strong {
+  color: var(--tinta);
+}
+
+.apolice figcaption {
+  max-width: 46em;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--tinta-fraca);
+}
+
+.clausula {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px 28px;
+}
+
+.clausula__texto {
+  flex: 1 1 260px;
+  min-width: 0;
+  font-family: var(--fonte-doc);
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--tinta-doc);
+}
+
+.clausula__num {
+  font-weight: 600;
+}
+
+/* O grifo é uma faixa que cresce da esquerda para a direita.
+   --grifo vai de 0 (sem grifo) a 1 (grifado). O script controla esse valor
+   pela rolagem; sem script, fica 1 e o texto aparece grifado normalmente.
+   O "slice" faz a faixa atravessar as linhas em ordem quando o trecho quebra. */
+mark {
+  padding: 1px 2px;
+  margin: 0 -2px;            /* compensa o padding: o texto fica com espaçamento normal */
+  color: inherit;
+  background-color: transparent;
+  background-image: linear-gradient(var(--grifo-fundo), var(--grifo-fundo));
+  background-repeat: no-repeat;
+  background-size: calc(var(--grifo, 1) * 100%) 100%;
+  -webkit-box-decoration-break: slice;
+  box-decoration-break: slice;
+}
+
+.grifar mark {
+  --grifo: 0;
+}
+
+@media print {
+  .grifar mark {
+    --grifo: 1 !important;
+  }
+}
+
+.nota {
+  flex: 1 1 180px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.nota__titulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.nota__titulo::before {
+  content: "";
+  flex: none;
+  width: 10px;
+  height: 10px;
+  background: var(--grifo-fundo);
+  outline: 1px solid var(--marca-borda);
+}
+
+.nota__texto {
+  color: var(--tinta-suave);
+}
+
+/* ---------- Seções ---------- */
+
+.secao {
+  padding-block: clamp(56px, 8vw, 112px);
+}
+
+.secao--grande {
+  padding-block: clamp(64px, 9vw, 120px);
+}
+
+.secao__titulo {
+  font-size: clamp(2rem, 3.4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.subtitulo {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* ---------- Seguros ---------- */
+
+.seguros {
+  background: var(--papel-alt);
+}
+
+.seguros__grade {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 72px;
+}
+
+.seguros__intro {
+  flex: 1 1 280px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.seguros__intro p {
+  max-width: 30em;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--tinta-suave);
+}
+
+.seguros__conteudo {
+  flex: 2 1 560px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.lista-seguros {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 0 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.seguro {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 0 30px;
+}
+
+.seguro h3 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.seguro p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--tinta-suave);
+}
+
+.seguros__outro {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--tinta-suave);
+}
+
+.seguros__outro a {
+  font-weight: 700;
+}
+
+/* ---------- Sinistro ---------- */
+
+.sinistro {
+  background: var(--banda);
+  color: var(--banda-titulo);
+}
+
+.sinistro__interno {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(40px, 5vw, 64px);
+}
+
+.sinistro__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 760px;
+}
+
+.sinistro h2 {
+  font-size: clamp(2rem, 3.8vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  color: var(--banda-titulo);
+}
+
+.sinistro__intro p {
+  max-width: 34em;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--banda-texto);
+}
+
+.sinistro a:focus-visible {
+  outline-color: var(--marca-texto);
+}
+
+.passos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 40px 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: passo;
+}
+
+.passo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  counter-increment: passo;
+}
+
+.passo::before {
+  content: counter(passo);
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--marca-texto);
+}
+
+.passo h3 {
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--banda-titulo);
+}
+
+.passo p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--banda-texto);
+}
+
+/* ---------- Endereço e contato ---------- */
+
+.visite__grade {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 56px 80px;
+}
+
+.visite__endereco {
+  flex: 3 1 420px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.visite__endereco .btn {
+  align-self: flex-start;
+}
+
+address {
+  font-style: normal;
+  font-size: clamp(1.375rem, 2.2vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.horario {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.horario dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 10px 32px;
+  max-width: 440px;
+  line-height: 1.5;
+}
+
+.horario dt {
+  color: var(--tinta-suave);
+}
+
+.horario dd {
+  font-weight: 500;
+}
+
+.visite__contato {
+  flex: 2 1 320px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.telefone {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.telefone__numero {
+  padding: 4px 0;
+  font-size: clamp(1.75rem, 3vw, 2.375rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--tinta);
+  text-decoration: none;
+}
+
+.telefone__numero:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.telefone__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+}
+
+.avaliacao {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 28px;
+  background: var(--superficie);
+  border: 1px solid var(--linha);
+  border-radius: 3px;
+}
+
+.avaliacao__nota {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.estrelas {
+  display: flex;
+  gap: 2px;
+  color: var(--tinta);
+}
+
+.avaliacao__fonte {
+  font-size: 15px;
+  color: var(--tinta-suave);
+}
+
+.avaliacao blockquote {
+  font-family: var(--fonte-doc);
+  font-size: 22px;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.avaliacao figcaption {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--tinta-suave);
+}
+
+/* ---------- Rodapé ---------- */
+
+.rodape {
+  background: var(--papel-alt);
+}
+
+.rodape__interno {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px 40px;
+  padding-block: 32px 40px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--tinta-suave);
+}
+
+.rodape strong {
+  color: var(--tinta);
+}
+
+.rodape__dados {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 28px;
+}
+
+/* ---------- Celular ---------- */
+
+@media (max-width: 560px) {
+  .topo {
+    gap: 4px 16px;
+    padding-block: 14px 4px;
+  }
+
+  .marca {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .topo__whats {
+    order: 1;
+  }
+
+  .nav {
+    order: 2;
+    width: 100%;
+    gap: 0 24px;
+  }
+
+  .passo {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 16px;
+    row-gap: 6px;
+    align-items: baseline;
+  }
+
+  .passo::before {
+    grid-row: span 2;
+    font-size: 36px;
+    min-width: 0.8em;
+  }
+
+  .acoes .btn,
+  .visite__endereco .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .visite__endereco .btn {
+    align-self: stretch;
+  }
+
+  .avaliacao {
+    padding: 22px;
+  }
+}
+
+/* ---------- Animação ao rolar ----------
+   Só vale quando o script coloca a classe .anima no <html>.
+   Sem JavaScript, tudo aparece normalmente. */
+
+:root {
+  --revelar-duracao: 700ms;
+  --revelar-distancia: 28px;
+  --revelar-curva: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.anima [data-revelar] {
+  opacity: 0;
+  transform: translateY(var(--revelar-distancia));
+  transition:
+    opacity var(--revelar-duracao) var(--revelar-curva) var(--atraso, 0ms),
+    transform var(--revelar-duracao) var(--revelar-curva) var(--atraso, 0ms),
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.anima [data-revelar].visivel {
+  opacity: 1;
+  transform: none;
+}
+
+@media print {
+  .anima [data-revelar] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ---------- Movimento reduzido ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn {
+    transition: none;
+  }
+
+  .anima [data-revelar] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .grifar mark {
+    --grifo: 1 !important;
+  }
+}
